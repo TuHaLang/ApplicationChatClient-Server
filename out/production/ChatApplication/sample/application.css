@@ -1,0 +1,39 @@
+.root{
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.flowpane{
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.textContent{
+    -fx-font-family: "Adobe Arabic", "Adobe Garamond Pro Bold";
+    -fx-font-size: 20px;
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.textMsg{
+    -fx-font-family: "Adobe Hebrew";
+    -fx-font-size: 20px;
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.btnsendmsg{
+    -fx-background-image: url("sendMsg.png");
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.btnsendfile{
+    -fx-background-image: url("sendFile.png");
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+
+.text-area, .text-field {
+    -fx-font-family: Consolas;
+    -fx-highlight-fill: green;
+    -fx-highlight-text-fill: #000000;
+    -fx-text-fill: green;
+    -fx-background-color: #000000;
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.text-area .content, .text-field .content{
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+}
+.clientonline .content{
+    -fx-background-color: #000000;
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="600.0" styleClass="paneRoot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <bottom>
+      <FlowPane prefHeight="58.0" prefWidth="600.0" styleClass="flowpane" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="textMsg" prefHeight="59.0" prefWidth="538.0" styleClass="textMsg" />
+            <Button fx:id="btnSendMsg" mnemonicParsing="false" onAction="#SendMsg" prefHeight="57.0" prefWidth="60.0" styleClass="btnsendmsg" />
+         </children>
+      </FlowPane>
+   </bottom>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#changeIPServer" text="Change IP server" />
+                  <MenuItem mnemonicParsing="false" onAction="#changePort" text="Change port" />
+                  <MenuItem mnemonicParsing="false" onAction="#changeNameGroup" text="Change name group" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="https://www.facebook.com/tuhalang007" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+         <top>
+            <Pane prefHeight="36.0" prefWidth="600.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="lblChatWith" layoutX="212.0" layoutY="-2.0" prefHeight="40.0" prefWidth="172.0" text="Your Group" textAlignment="JUSTIFY" textFill="#f80909">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </top>
+         <right>
+            <VBox prefHeight="355.0" prefWidth="155.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: black;" text="     Client online" textAlignment="JUSTIFY" textFill="#cd0e0e">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="textClient" prefHeight="327.0" prefWidth="161.0" styleClass="clientonline">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextArea fx:id="textContent" prefHeight="391.0" prefWidth="448.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
