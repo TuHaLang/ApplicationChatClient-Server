@@ -31,7 +31,7 @@ public class Controller implements Initializable {
     static String contentSend = "";
     static boolean test = false;
     private static String nameClient = "User";
-    private static String ipServer = "192.168.1.239";
+    private static String ipServer = "localhost";
     private static int port = 9999;
     private static String nameGroup = "Your Group";
 
@@ -58,6 +58,7 @@ public class Controller implements Initializable {
         result.ifPresent(ip -> {
             if(!ip.trim().equals("")){
                 ipServer = ip;
+                SendAndReceive();
             }else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("WARNING!!!");
@@ -76,6 +77,7 @@ public class Controller implements Initializable {
         result.ifPresent(newPort -> {
             if(newPort.trim().matches("\\d+")){
                 port = Integer.parseInt(newPort);
+                SendAndReceive();
             }else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("WARNING!!!");
@@ -104,27 +106,13 @@ public class Controller implements Initializable {
         });
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        //Nhập tên cho client
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("ApplicationChat");
-        dialog.setHeaderText("Enter your name:");
-        dialog.setContentText("Name:");
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(name -> {
-            if(!name.trim().equals("")){
-                nameClient = name;
-            }
-        });
-
-        lblChatWith.setText(nameGroup);
-        textClient.setText("");
-
+    public void SendAndReceive(){
         try {
+            //Kết nối với server
             Socket socket = new Socket(ipServer, port);
             System.out.println("Connected server...");
+
+            //Gửi username lên cho server
             bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             bw.write("$$ " + nameClient);
             bw.newLine();
@@ -138,10 +126,19 @@ public class Controller implements Initializable {
                         try {
                             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                             String contentLine = br.readLine();
+
+                            //Hiển thị các client online
+                            //Tin nhắn được gửi từ server sẽ được đánh dấu bằng cách bắt đầu bằng $$
                             if(contentLine.startsWith("$$")){
+                                String[] clientOnline = contentLine.split(";");
+                                contentLine="";
+                                for(String client : clientOnline){
+                                    contentLine+=client + "\n";
+                                }
                                 textClient.setText(contentLine);
                             }
                             else {
+                                //Hiển thị tin nhắn gửi đến thông thường
                                 if (!contentLine.trim().equals("")) {
                                     contentMsg += "\n" + contentLine;
                                     textContent.setText(contentMsg);
@@ -195,8 +192,31 @@ public class Controller implements Initializable {
             alert.setContentText("Please make sure you have started SERVER!!! \nIf you started SERVER please check IP server and port!!!");
             alert.show();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //Nhập tên cho client
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("ApplicationChat");
+        dialog.setHeaderText("Enter your name:");
+        dialog.setContentText("Name:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(name -> {
+            if(!name.trim().equals("")){
+                nameClient = name;
+            }
+        });
+
+        lblChatWith.setText(nameGroup);
+        textClient.setText("");
+
+        SendAndReceive();
+
         textContent.setEditable(false);
 
+        //bắt sự kiện người dùng nhấn phím enter để gửi tin nhắn
         textMsg.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {

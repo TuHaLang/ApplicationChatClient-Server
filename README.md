@@ -1,6 +1,4 @@
 - Ứng dụng chat client-server 
-- Sử dụng java socket để truyền dữ liệu giữa các client
-- Ứng dụng còn khá nhiều lỗi và hoạt động chưa thực sự tốt
 
 ---------------------------------------------
 
